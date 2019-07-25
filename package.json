@@ -1,0 +1,41 @@
+{
+  "name": "create-react-app-with-typescript",
+  "version": "4.0.0",
+  "private": true,
+  "dependencies": {
+    "@babel/plugin-proposal-decorators": "7.2.3",
+    "@types/react": "16.8.23",
+    "@types/react-dom": "16.8.4",
+    "@types/react-router-dom": "4.3.4",
+    "axios": "0.19.0",
+    "mobx": "5.13.0",
+    "mobx-react": "6.1.1",
+    "mobx-react-devtools": "6.0.3",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "react-router-dom": "5.0.1",
+    "react-scripts": "3.0.1",
+    "tslint": "^5.18.0",
+    "tslint-loader": "^3.5.4",
+    "tslint-react": "4.0.0",
+    "typescript": "3.5.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
