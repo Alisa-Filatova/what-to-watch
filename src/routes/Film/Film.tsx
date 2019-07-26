@@ -44,7 +44,7 @@ class Film extends React.PureComponent<FilmProps> {
         <section className="movie-card movie-card--full">
           <div className="movie-card__hero">
             <div className="movie-card__bg">
-              <img src={film.background_image} alt="The Grand Budapest Hotel"/>
+              <img src={film.background_image} alt={film.name} />
             </div>
 
             <h1 className="visually-hidden">WTW</h1>

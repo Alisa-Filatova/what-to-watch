@@ -12,23 +12,23 @@ interface StoreProps {
 @inject('filmsStore')
 @observer
 class App extends React.Component<StoreProps & RouteComponentProps> {
-    render() {
-        return (
-            <>
-                <SvgSprite />
-                <Switch>
-                    {ROUTES.map((route) =>
-                        <Route
-                            key={route.path}
-                            path={route.path}
-                            component={route.component}
-                            exact={route.exact}
-                        />
-                    )}
-                </Switch>
-            </>
-        );
-    }
+  render() {
+    return (
+      <>
+        <SvgSprite />
+        <Switch>
+          {ROUTES.map((route) =>
+            <Route
+              key={route.path}
+              path={route.path}
+              component={route.component}
+              exact={route.exact}
+            />
+          )}
+        </Switch>
+      </>
+    );
+  }
 }
 
 export default withRouter(App);

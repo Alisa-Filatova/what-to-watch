@@ -10,49 +10,64 @@ import { IFilm } from '../../types';
 class Main extends React.PureComponent {
   render() {
     const films: IFilm[] = Array.from(stores.filmsStore.films.values());
+    const promoFilm = stores.filmsStore.promo;
 
     return (
       <>
         <section className="movie-card">
-          <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel"/>
-          </div>
-
-          <h1 className="visually-hidden">WTW</h1>
-
-          <Header user={{name: 'dima'}} />
-
-          <div className="movie-card__wrap">
-            <div className="movie-card__info">
-              <div className="movie-card__poster">
-                <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218"
-                     height="327"/>
+          {promoFilm &&
+            <>
+              <div className="movie-card__bg">
+                <img
+                  src={promoFilm.background_image}
+                  alt={promoFilm.name}
+                />
               </div>
 
-              <div className="movie-card__desc">
-                <h2 className="movie-card__title">The Grand Budapest Hotel</h2>
-                <p className="movie-card__meta">
-                  <span className="movie-card__genre">Drama</span>
-                  <span className="movie-card__year">2014</span>
-                </p>
+              <h1 className="visually-hidden">WTW</h1>
 
-                <div className="movie-card__buttons">
-                  <button className="btn btn--play movie-card__button" type="button">
-                    <svg viewBox="0 0 19 19" width="19" height="19">
-                      <use xlinkHref="#play-s"/>
-                    </svg>
-                    <span>Play</span>
-                  </button>
-                  <button className="btn btn--list movie-card__button" type="button">
-                    <svg viewBox="0 0 19 20" width="19" height="20">
-                      <use xlinkHref="#add"/>
-                    </svg>
-                    <span>My list</span>
-                  </button>
-                </div>
+              <Header user={{name: 'dima'}} />
+
+              <div className="movie-card__wrap">
+                <div className="movie-card__info">
+                  <div
+                    className="movie-card__poster"
+                    style={{backgroundColor: promoFilm.background_color}}
+                  >
+                    <img
+                      src={promoFilm.poster_image}
+                      alt={promoFilm.name}
+                      width="218"
+                      height="327"
+                    />
+                  </div>
+
+                  <p className="movie-card__desc">
+                    <h2 className="movie-card__title">{promoFilm.name}</h2>
+                    <p className="movie-card__meta">
+                    <span className="movie-card__genre">{promoFilm.genre}</span>
+                    <span className="movie-card__year">{promoFilm.released}</span>
+                  </p>
+
+                  <div className="movie-card__buttons">
+                    <button className="btn btn--play movie-card__button" type="button">
+                      <svg viewBox="0 0 19 19" width="19" height="19">
+                        <use xlinkHref="#play-s"/>
+                      </svg>
+                      <span>Play</span>
+                    </button>
+                    <button className="btn btn--list movie-card__button" type="button">
+                      <svg viewBox="0 0 19 20" width="19" height="20">
+                        <use xlinkHref="#add"/>
+                      </svg>
+                      <span>My list</span>
+                    </button>
+                  </div>
+                </p>
               </div>
             </div>
-          </div>
+          </>
+        }
         </section>
 
         <div className="page-content">

@@ -10,15 +10,15 @@ import App from './App';
 configure({ enforceActions: 'always' });
 
 ReactDOM.render(
-    <Provider {...stores}>
-        <Stores.Provider value={stores}>
-            <BrowserRouter>
-                <Route
-                    path="/"
-                    render={(props: any) => <App {...props} />}
-                />
-            </BrowserRouter>
-        </Stores.Provider>
-    </Provider>,
-    document.getElementById('root') as HTMLElement
+  <Provider {...stores}>
+    <Stores.Provider value={stores}>
+      <BrowserRouter>
+        <Route
+          path="/"
+          render={(props: any) => <App {...props} />}
+        />
+      </BrowserRouter>
+    </Stores.Provider>
+  </Provider>,
+  document.getElementById('root') as HTMLElement
 );
