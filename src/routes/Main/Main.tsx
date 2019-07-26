@@ -32,8 +32,7 @@ class Main extends React.PureComponent {
                 <div className="movie-card__info">
                   <div
                     className="movie-card__poster"
-                    style={{backgroundColor: promoFilm.background_color}}
-                  >
+                    style={{backgroundColor: promoFilm.background_color}}>
                     <img
                       src={promoFilm.poster_image}
                       alt={promoFilm.name}
@@ -42,12 +41,12 @@ class Main extends React.PureComponent {
                     />
                   </div>
 
-                  <p className="movie-card__desc">
+                  <div className="movie-card__desc">
                     <h2 className="movie-card__title">{promoFilm.name}</h2>
                     <p className="movie-card__meta">
-                    <span className="movie-card__genre">{promoFilm.genre}</span>
-                    <span className="movie-card__year">{promoFilm.released}</span>
-                  </p>
+                      <span className="movie-card__genre">{promoFilm.genre}</span>
+                      <span className="movie-card__year">{promoFilm.released}</span>
+                    </p>
 
                   <div className="movie-card__buttons">
                     <button className="btn btn--play movie-card__button" type="button">
@@ -63,7 +62,7 @@ class Main extends React.PureComponent {
                       <span>My list</span>
                     </button>
                   </div>
-                </p>
+                </div>
               </div>
             </div>
           </>
@@ -112,7 +111,6 @@ class Main extends React.PureComponent {
               <button className="catalog__button" type="button">Show more</button>
             </div>
           </section>
-
           <Footer />
         </div>
       </>

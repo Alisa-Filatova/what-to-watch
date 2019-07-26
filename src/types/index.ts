@@ -34,12 +34,12 @@ export interface IComment extends IBaseComment {
   date: string;
 }
 
-export interface IAuthFields {
+export interface IUserRequest {
   email: string;
   password: string;
 }
 
-export interface IUserFull extends IUser {
+export interface IUserResponse extends IUser {
   email: string;
   avatar_url: string;
 }

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Route, Switch, withRouter, RouteComponentProps } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
 import SvgSprite from './components/SvgSprite/SvgSprite';
 import { ROUTES } from './routes';
 import FilmsStore from './stores/filmsStore';
-import { inject, observer } from 'mobx-react';
 
 interface StoreProps {
   filmsStore: FilmsStore;

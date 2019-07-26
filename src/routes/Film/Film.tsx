@@ -37,7 +37,6 @@ class Film extends React.PureComponent<FilmProps> {
   render() {
     const filmId = this.getFilmId();
     const film = this.props.filmsStore.films.get(filmId);
-    if (!film) return;
 
     return (
       <>
@@ -72,7 +71,7 @@ class Film extends React.PureComponent<FilmProps> {
                     </svg>
                     <span>My list</span>
                   </button>
-                  <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                  <a href="" className="btn movie-card__button">Add review</a>
                 </div>
               </div>
             </div>
@@ -107,16 +106,20 @@ class Film extends React.PureComponent<FilmProps> {
                   <div className="movie-rating__score">{film.rating}</div>
                   <p className="movie-rating__meta">
                     <span className="movie-rating__level">Very good</span>
-                    <span className="movie-rating__count">240 ratings</span>
+                    <span className="movie-rating__count">{film.scores_count} ratings</span>
                   </p>
                 </div>
 
                 <div className="movie-card__text">
                   <p>{film.description}</p>
 
-                  <p className="movie-card__director"><strong>Director: {film.director}</strong></p>
+                  <p
+                    className="movie-card__director"><strong>Director: {film.director}</strong>
+                  </p>
 
-                  <p className="movie-card__starring"><strong>Starring: {film.starring.join(', ')} and other</strong></p>
+                  <p
+                    className="movie-card__starring"><strong>Starring: {film.starring.join(', ')} and other</strong>
+                  </p>
                 </div>
               </div>
             </div>

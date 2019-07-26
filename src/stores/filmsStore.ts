@@ -50,13 +50,10 @@ class FilmsStore {
     }
   }
 
-  @action async fetchPromoFilm(): Promise<void> {
+  @action async fetchPromoFilm() {
     try {
       const promoFilm = await fetchPromo();
-      console.log(promoFilm);
-      runInAction(() => {
-        this.promo = promoFilm;
-      });
+      runInAction(() => { this.promo = promoFilm });
     } catch (error) {
       runInAction(() => {
         console.error('promo not loaded', error);

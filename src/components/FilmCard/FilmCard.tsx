@@ -13,14 +13,16 @@ class FilmCard extends React.PureComponent<Props> {
     return (
       <article className="small-movie-card catalog__movies-card">
         <button className="small-movie-card__play-btn" type="button">Play</button>
-        <div className="small-movie-card__image">
-          <img
-            src={film.preview_image}
-            alt={film.name}
-            width="280"
-            height="175"
-          />
-        </div>
+        <Link to={getFilmUrl(film.id)}>
+          <div className="small-movie-card__image">
+            <img
+              src={film.preview_image}
+              alt={film.name}
+              width="280"
+              height="175"
+            />
+          </div>
+        </Link>
         <h3 className="small-movie-card__title">
           <Link
             className="small-movie-card__link"
