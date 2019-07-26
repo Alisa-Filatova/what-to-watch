@@ -6,14 +6,16 @@ import { observer, inject } from 'mobx-react';
 import { IRouteMatch } from '../../types';
 import fetchFilm from '../../actions/fetchFilm';
 import FilmsStore from '../../stores/filmsStore';
+import UserStore from '../../stores/userStore';
 
 interface StoreProps {
   filmsStore: FilmsStore;
+  userStore: UserStore;
 }
 
 type FilmProps = StoreProps & RouteComponentProps<IRouteMatch & { filmId: string }>;
 
-@inject('filmsStore')
+@inject('filmsStore', 'userStore')
 @observer
 class Film extends React.PureComponent<FilmProps> {
 
@@ -48,7 +50,7 @@ class Film extends React.PureComponent<FilmProps> {
 
             <h1 className="visually-hidden">WTW</h1>
 
-            <Header user={{name: 'Dima'}} />
+            <Header user={this.props.userStore.data} />
 
             <div className="movie-card__wrap">
               <div className="movie-card__desc">

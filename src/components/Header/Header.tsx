@@ -1,9 +1,10 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
+import { IUserResponse } from '../../types';
 
 interface Props {
   pageTitle?: string;
-  user?: {};
+  user?: IUserResponse;
   prefix?: string;
 }
 
@@ -17,7 +18,7 @@ class Header extends React.PureComponent<Props> {
           <div className="user-block">
             <div className="user-block__avatar">
               <img
-                src="img/avatar.jpg"
+                src={user.avatar_url}
                 alt="User avatar"
                 width="63"
                 height="63"
