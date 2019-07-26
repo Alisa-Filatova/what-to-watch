@@ -3,6 +3,7 @@ import { observer } from 'mobx-react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import { IUserRequest } from '../../types';
+import stores from '../../stores';
 
 const EMAIL_REGEXP = new RegExp('^([a-z0-9_-]+)*[a-z0-9_-]+@[a-z0-9_-]+([a-z0-9_-]+)*[a-z]{2,6}$');
 const ERROR_COLOR = 'red';
@@ -40,7 +41,7 @@ class Login extends React.PureComponent<Props> {
       const password = this.passwordInput.current.value;
 
       if (email && password && EMAIL_REGEXP.test(email)) {
-        this.props.onLogin({email, password});
+        stores.userStore.login({email, password});
       }
     }
   };

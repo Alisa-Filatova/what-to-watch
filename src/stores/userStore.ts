@@ -1,6 +1,6 @@
 import { observable, action, runInAction } from 'mobx';
-import { IUserResponse } from '../types';
-import { fetchUser } from '../services'
+import { IUserResponse, IUserRequest } from '../types';
+import { fetchUser, loginRequest } from '../services'
 
 class UserStore {
   @observable data: IUserResponse | null;
@@ -11,6 +11,21 @@ class UserStore {
     this.data = null;
     this.fetching = false;
     this.isAuthenticated = false;
+  }
+
+  @action async login(user: IUserRequest) {
+    try {
+      await loginRequest(user);
+      this.fetch();
+      runInAction(() => {
+        this.isAuthenticated = true;
+      });
+    }
+    catch (error) {
+      runInAction(() => {
+        this.isAuthenticated = false;
+      });
+    }
   }
 
   @action async fetch(): Promise<IUserResponse | null> {

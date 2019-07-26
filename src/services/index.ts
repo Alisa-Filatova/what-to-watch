@@ -11,7 +11,7 @@ export const fetchPromo = async (): Promise<IFilm> => {
   return resp.data;
 };
 
-export const loginRequest = async (): Promise<IUserRequest> => {
+export const loginRequest = async (user: IUserRequest): Promise<IUserRequest> => {
   const resp = await api.post('/login');
   return resp.data;
 };
