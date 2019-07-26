@@ -1,4 +1,4 @@
-export interface Film {
+export interface IFilm {
   id: number;
   name: string;
   poster_image: string;
@@ -18,28 +18,32 @@ export interface Film {
   is_favorite: boolean;
 }
 
-export interface User {
+export interface IUser {
   id: number;
   name: string;
 }
 
-export interface BaseComment {
+export interface IBaseComment {
   rating: number;
   comment: string;
 }
 
-export interface Comment extends BaseComment{
+export interface IComment extends IBaseComment {
   id: number;
-  user: User;
+  user: IUser;
   date: string;
 }
 
-export interface AuthFields {
+export interface IAuthFields {
   email: string;
   password: string;
 }
 
-export interface UserFull extends User {
+export interface IUserFull extends IUser {
   email: string;
   avatar_url: string;
 }
+
+export interface IRouteMatch {}
+
+

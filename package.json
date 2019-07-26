@@ -3,10 +3,10 @@
   "version": "4.0.0",
   "private": true,
   "dependencies": {
-    "@babel/plugin-proposal-decorators": "7.2.3",
     "@types/react": "16.8.23",
     "@types/react-dom": "16.8.4",
     "@types/react-router-dom": "4.3.4",
+    "@types/storejs": "2.0.3",
     "axios": "0.19.0",
     "mobx": "5.13.0",
     "mobx-react": "6.1.1",
@@ -20,11 +20,22 @@
     "tslint-react": "4.0.0",
     "typescript": "3.5.1"
   },
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "7.4.4"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "babel": {
+    "plugins": [
+      "@babel/plugin-proposal-decorators"
+    ],
+    "presets": [
+      "react-app"
+    ]
   },
   "browserslist": {
     "production": [

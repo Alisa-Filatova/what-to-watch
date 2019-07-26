@@ -1,9 +1,9 @@
 import React from 'react';
 import FilmCard from '../FilmCard/FilmCard';
-import { Film } from '../../types';
+import { IFilm } from '../../types';
 
 interface Props {
-  films: Film[];
+  films: IFilm[];
 }
 
 class FilmsList extends React.PureComponent<Props> {
@@ -12,7 +12,7 @@ class FilmsList extends React.PureComponent<Props> {
     return (
       <div className="catalog__movies-list">
         {films.map((film) =>
-          <FilmCard film={film} />
+          <FilmCard film={film} key={film.id} />
         )}
       </div>
     );

@@ -1,6 +1,7 @@
 import * as links from './links';
 import Main from './routes/Main/Main';
 import Login from './routes/Login/Login';
+import Film from './routes/Film/Film';
 
 export const ROUTES = [
   {
@@ -13,10 +14,10 @@ export const ROUTES = [
     component: Login,
     exact: true,
   },
-  // {
-  //   path: links.getFilmUrl(':filmId'),
-  //   component: '',
-  // },
+  {
+    path: links.getFilmUrl(':filmId'),
+    component: Film,
+  },
   // {
   //   path: links.getReviewUrl(':filmId'),
   //   component: '',
