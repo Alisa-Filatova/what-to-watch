@@ -1,7 +1,7 @@
-import { observable, action, runInAction, computed } from 'mobx';
+import { observable, action, runInAction, computed, onBecomeObserved } from 'mobx';
 import { IUserResponse, IUserRequest } from '../types';
 import { fetchUser, loginRequest } from '../services';
-import Cookie from 'mobx-cookie';
+import storage from '../storage';
 
 const COOKIE_KEY = 'authToken';
 
@@ -15,20 +15,10 @@ class UserStore {
     this.data = null;
     this.fetching = false;
     this.isAuthenticated = this.getIsAuthenticated;
-    this.cookie = null;
+    this.cookie = storage.get(COOKIE_KEY);
+
+    onBecomeObserved(this, 'data', () => this.fetch());
   }
-
-  @computed get authToken() {
-    return this.cookie.value;
-  }
-
-  @action setAuthToken = value => {
-    this.cookie.set(value);
-  };
-
-  @action unsetAuthToken = () => {
-    this.cookie.remove();
-  };
 
   @computed get getIsAuthenticated(): boolean {
     return this.cookie !== null;
@@ -39,13 +29,14 @@ class UserStore {
       await loginRequest(user);
       this.fetch();
       runInAction(() => {
-        this.isAuthenticated = true;
-        this.cookie = new Cookie(COOKIE_KEY);
+        storage.set(COOKIE_KEY, 'asd123');
       });
     }
     catch (error) {
       runInAction(() => {
         this.isAuthenticated = false;
+        storage.remove(COOKIE_KEY);
+        this.cookie = null;
       });
     }
   }
@@ -57,14 +48,12 @@ class UserStore {
       runInAction(() => {
         this.data = userData;
         this.fetching = false;
-        this.isAuthenticated = true;
       });
       return Promise.resolve(userData);
     } catch (error) {
       runInAction(() => {
         this.data = null;
         this.fetching = false;
-        this.isAuthenticated = false;
       });
       return Promise.reject(error);
     }

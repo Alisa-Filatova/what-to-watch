@@ -2,7 +2,7 @@ import * as links from './links';
 import Main from './routes/Main/Main';
 import Login from './routes/Login/Login';
 import Film from './routes/Film/Film';
-import authRequired from './utils/authRequired';
+// import authRequired from './utils/authRequired';
 
 export const ROUTES = [
   {
@@ -12,7 +12,7 @@ export const ROUTES = [
   },
   {
     path: links.getLoginUrl(),
-    component: authRequired(Login),
+    component: Login,
     exact: true,
   },
   {

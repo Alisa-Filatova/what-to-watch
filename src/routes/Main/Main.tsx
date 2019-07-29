@@ -5,7 +5,6 @@ import FilmsList from '../../components/FilmsList/FilmsList';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/Loader/Loader';
-// import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import { IFilm } from '../../types';
 import stFetchStatus from '../../types/enums/stFetchStatus';
 
@@ -15,8 +14,6 @@ class Main extends React.PureComponent {
     const films: IFilm[] = Array.from(stores.filmsStore.films.values());
     const promoFilm = stores.filmsStore.promo;
     const fetching = stores.filmsStore.filmsFetching;
-
-    console.log(stores.userStore.cookie);
 
     return (
       <>

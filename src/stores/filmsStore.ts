@@ -1,4 +1,4 @@
-import { observable, ObservableMap, action, runInAction, onBecomeObserved, computed } from 'mobx';
+import { observable, ObservableMap, action, runInAction, onBecomeObserved } from 'mobx';
 import { IFilm } from '../types';
 import stFetchStatus from '../types/enums/stFetchStatus';
 import { fetchFilms, fetchPromo } from '../services';
