@@ -11,6 +11,16 @@ export const fetchPromo = async (): Promise<IFilm> => {
   return resp.data;
 };
 
+export const fetchFavorites = async (): Promise<IFilm[]> => {
+  const resp = await api.get('/favorite');
+  return resp.data;
+};
+
+export const sendToFavorites = async (film: IFilm): Promise<IFilm> => {
+  const resp = await api.post(' /favorite/:film_id/:status', film);
+  return resp.data;
+};
+
 export const loginRequest = async (user: IUserRequest): Promise<IUserRequest> => {
   const resp = await api.post('/login', user);
   return resp.data;

@@ -2,6 +2,7 @@ import * as links from './links';
 import Main from './routes/Main/Main';
 import Login from './routes/Login/Login';
 import Film from './routes/Film/Film';
+import MyList from './routes/MyList/MyList';
 // import authRequired from './utils/authRequired';
 
 export const ROUTES = [
@@ -23,9 +24,9 @@ export const ROUTES = [
   //   path: links.getReviewUrl(':filmId'),
   //   component: '',
   // },
-  // {
-  //   path: links.getMyListUrl(),
-  //   component: '',
-  // },
+  {
+    path: links.getMyListUrl(),
+    component: MyList,
+  },
 ];
 
