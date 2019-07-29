@@ -17,8 +17,11 @@ class Main extends React.PureComponent {
 
     return (
       <>
-        <section className="movie-card">
-          {promoFilm &&
+        {promoFilm &&
+        <section
+          className="movie-card"
+          style={{background: promoFilm.background_color}}
+        >
             <>
               <div className="movie-card__bg">
                 <img
@@ -73,8 +76,8 @@ class Main extends React.PureComponent {
               </div>
             </div>
           </>
-        }
         </section>
+        }
 
         <div className="page-content">
           <section className="catalog">

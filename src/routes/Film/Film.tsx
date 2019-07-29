@@ -42,7 +42,10 @@ class Film extends React.PureComponent<FilmProps> {
 
     return (
       <>
-        <section className="movie-card movie-card--full">
+        <section
+          className="movie-card movie-card--full"
+          style={{background: film.background_color}}
+        >
           <div className="movie-card__hero">
             <div className="movie-card__bg">
               <img src={film.background_image} alt={film.name} />
