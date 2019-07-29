@@ -4,13 +4,19 @@ import stores from '../../stores';
 import FilmsList from '../../components/FilmsList/FilmsList';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import Loader from '../../components/Loader/Loader';
+// import VideoPlayer from '../../components/VideoPlayer/VideoPlayer';
 import { IFilm } from '../../types';
+import stFetchStatus from '../../types/enums/stFetchStatus';
 
 @observer
 class Main extends React.PureComponent {
   render() {
     const films: IFilm[] = Array.from(stores.filmsStore.films.values());
     const promoFilm = stores.filmsStore.promo;
+    const fetching = stores.filmsStore.filmsFetching;
+
+    console.log(stores.userStore.cookie);
 
     return (
       <>
@@ -22,6 +28,10 @@ class Main extends React.PureComponent {
                   src={promoFilm.background_image}
                   alt={promoFilm.name}
                 />
+                {/*<VideoPlayer*/}
+                {/*  previewImageSrc={promoFilm.preview_image}*/}
+                {/*  videoSrc={promoFilm.preview_video_link}*/}
+                {/*/>*/}
               </div>
 
               <h1 className="visually-hidden">WTW</h1>
@@ -105,8 +115,9 @@ class Main extends React.PureComponent {
                 <a href="#" className="catalog__genres-link">Thrillers</a>
               </li>
             </ul>
-
-            <FilmsList films={films} />
+            {fetching === stFetchStatus.Fetching && <Loader />}
+            {fetching === stFetchStatus.Done && <FilmsList films={films} />}
+            {fetching === stFetchStatus.Error && <div>Oops! Something went wrong!</div>}
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>
             </div>

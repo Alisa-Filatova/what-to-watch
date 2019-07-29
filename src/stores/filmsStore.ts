@@ -1,4 +1,4 @@
-import { observable, ObservableMap, action, runInAction, onBecomeObserved } from 'mobx';
+import { observable, ObservableMap, action, runInAction, onBecomeObserved, computed } from 'mobx';
 import { IFilm } from '../types';
 import stFetchStatus from '../types/enums/stFetchStatus';
 import { fetchFilms, fetchPromo } from '../services';
@@ -8,11 +8,13 @@ class FilmsStore {
   @observable films: ObservableMap<number, IFilm>;
   @observable filmsFetching: stFetchStatus;
   @observable promo: IFilm | null;
+  @observable promoFetching: stFetchStatus;
 
   constructor() {
     this.films = observable.map({});
     this.filmsFetching = stFetchStatus.None;
     this.promo = null;
+    this.promoFetching = stFetchStatus.None;
 
     onBecomeObserved(this, 'films', () => this.fetchFilms());
     onBecomeObserved(this, 'promo', () => this.fetchPromoFilm());
@@ -24,7 +26,7 @@ class FilmsStore {
 
   @action setFilm(film: IFilm) {
     const current = this.byId(film.id);
-    this.films.set(film.id, current !== undefined ? { ...current, ...film } : film);
+    this.films.set(film.id, current !== undefined ? {...current, ...film} : film);
   }
 
   @action async fetchFilm(filmId: number): Promise<IFilm> {
@@ -51,11 +53,17 @@ class FilmsStore {
   }
 
   @action async fetchPromoFilm() {
+    this.promoFetching = stFetchStatus.Fetching;
+
     try {
       const promoFilm = await fetchPromo();
-      runInAction(() => { this.promo = promoFilm });
+      runInAction(() => {
+        this.promo = promoFilm;
+        this.promoFetching = stFetchStatus.Done;
+      });
     } catch (error) {
       runInAction(() => {
+        this.promoFetching = stFetchStatus.Error;
         console.error('promo not loaded', error);
       });
     }

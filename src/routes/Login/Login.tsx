@@ -5,7 +5,7 @@ import Footer from '../../components/Footer/Footer';
 import { IUserRequest } from '../../types';
 import stores from '../../stores';
 
-const EMAIL_REGEXP = new RegExp('^([a-z0-9_-]+)*[a-z0-9_-]+@[a-z0-9_-]+([a-z0-9_-]+)*[a-z]{2,6}$');
+export const EMAIL_REGEXP = new RegExp('^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$');
 const ERROR_COLOR = 'red';
 const BASE_COLOR = 'green';
 

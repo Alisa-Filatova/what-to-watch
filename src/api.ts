@@ -1,12 +1,11 @@
 import axios from 'axios';
 import ResponseStatus from './types/enums/responseStatus';
+import Config from './config';
 
 const TIMEOUT = 5000;
-const BASE_URL = 'https://es31-server.appspot.com/wtw';
-
 
 export const api = axios.create({
-  baseURL: BASE_URL,
+  baseURL: Config.BASE_URL,
   timeout: TIMEOUT,
   withCredentials: true,
 });

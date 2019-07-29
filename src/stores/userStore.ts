@@ -1,16 +1,37 @@
-import { observable, action, runInAction } from 'mobx';
+import { observable, action, runInAction, computed } from 'mobx';
 import { IUserResponse, IUserRequest } from '../types';
-import { fetchUser, loginRequest } from '../services'
+import { fetchUser, loginRequest } from '../services';
+import Cookie from 'mobx-cookie';
+
+const COOKIE_KEY = 'authToken';
 
 class UserStore {
   @observable data: IUserResponse | null;
   @observable fetching: boolean;
   @observable isAuthenticated: boolean;
+  @observable cookie: any;
 
   constructor() {
     this.data = null;
     this.fetching = false;
-    this.isAuthenticated = false;
+    this.isAuthenticated = this.getIsAuthenticated;
+    this.cookie = null;
+  }
+
+  @computed get authToken() {
+    return this.cookie.value;
+  }
+
+  @action setAuthToken = value => {
+    this.cookie.set(value);
+  };
+
+  @action unsetAuthToken = () => {
+    this.cookie.remove();
+  };
+
+  @computed get getIsAuthenticated(): boolean {
+    return this.cookie !== null;
   }
 
   @action async login(user: IUserRequest) {
@@ -19,6 +40,7 @@ class UserStore {
       this.fetch();
       runInAction(() => {
         this.isAuthenticated = true;
+        this.cookie = new Cookie(COOKIE_KEY);
       });
     }
     catch (error) {

@@ -4,12 +4,14 @@ import { inject, observer } from 'mobx-react';
 import SvgSprite from './components/SvgSprite/SvgSprite';
 import { ROUTES } from './routes';
 import FilmsStore from './stores/filmsStore';
+import UserStore from './stores/userStore';
 
 interface StoreProps {
   filmsStore: FilmsStore;
+  userStore: UserStore;
 }
 
-@inject('filmsStore')
+@inject('filmsStore', 'userStore')
 @observer
 class App extends React.Component<StoreProps & RouteComponentProps> {
   render() {

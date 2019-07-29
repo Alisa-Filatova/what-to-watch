@@ -6,11 +6,11 @@ import stores from '../stores';
 const authRequired = (WrappedComponent: React.ComponentType<any>, PlaceholderComponent?: React.ComponentType<any>) => (
   class extends React.Component<any> {
     render() {
-      if (stores.userStore.isAuthenticated) return <WrappedComponent {...this.props} />;
+      if (!stores.userStore.isAuthenticated) return <WrappedComponent {...this.props} />;
 
       return !!PlaceholderComponent
-        ? <PlaceholderComponent />
-        : <Redirect to={links.getHomeUrl()} />;
+        ? <Redirect to={links.getHomeUrl()} />
+        : <PlaceholderComponent />;
     }
   }
 );
