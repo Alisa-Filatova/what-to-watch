@@ -3,7 +3,7 @@ import Logo from '../Logo/Logo';
 import { IUserResponse } from '../../types';
 import Config from '../../config';
 import { Link } from 'react-router-dom';
-import { getMyListUrl } from '../../links';
+import { getMyListUrl, getLoginUrl } from '../../links';
 
 interface Props {
   pageTitle?: string;
@@ -17,7 +17,7 @@ class Header extends React.PureComponent<Props> {
     return (
       <header className={`page-header ${prefix}__head`}>
         <Logo />
-        {user && (
+        {user ?
           <Link to={getMyListUrl()} className="user-block">
             <div className="user-block__avatar">
               <img
@@ -28,7 +28,13 @@ class Header extends React.PureComponent<Props> {
               />
             </div>
           </Link>
-        )}
+        :
+          <Link
+            to={getLoginUrl()}
+          >
+            Sign in
+          </Link>
+        }
         {pageTitle && <h1 className="page-title user-page__title">{pageTitle}</h1>}
       </header>
     );

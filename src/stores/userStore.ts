@@ -1,4 +1,4 @@
-import { observable, action, runInAction, computed, onBecomeObserved } from 'mobx';
+import { observable, action, runInAction, onBecomeObserved, computed } from 'mobx';
 import { IUserResponse, IUserRequest } from '../types';
 import { fetchUser, loginRequest } from '../services';
 import storage from '../storage';
@@ -16,8 +16,8 @@ class UserStore {
     this.fetching = false;
     this.isAuthenticated = this.getIsAuthenticated;
     this.cookie = storage.get(COOKIE_KEY);
-
-    onBecomeObserved(this, 'data', () => this.fetch());
+    //
+    // onBecomeObserved(this, 'data', () => this.fetch());
   }
 
   @computed get getIsAuthenticated(): boolean {
