@@ -13,6 +13,7 @@ class FilmsStore {
   @observable favoriteFilmsFetching: stFetchStatus;
 
   @observable promo: IFilm | null;
+  @observable currentGenre: string;
   @observable promoFetching: stFetchStatus;
 
   @observable genres: any;
@@ -25,6 +26,7 @@ class FilmsStore {
     this.favoriteFilmsFetching = stFetchStatus.None;
 
     this.promo = null;
+    this.currentGenre = 'All genres';
     this.promoFetching = stFetchStatus.None;
 
     this.genres = this.getUniqueGenresFromFilms;
@@ -121,6 +123,7 @@ class FilmsStore {
 
     try {
       const promoFilm = await fetchPromo();
+      runInAction(() => { this.promo = promoFilm; });
       runInAction(() => {
         this.promo = promoFilm;
         this.promoFetching = stFetchStatus.Done;
@@ -131,6 +134,14 @@ class FilmsStore {
         console.error('promo not loaded', error);
       });
     }
+  }
+
+  @action changeCurrentGenre (genre: string) {
+    this.currentGenre = genre;
+  }
+
+  @action filterFilmsByGenre (films: IFilm[], genre: string) {
+    films.filter((film: IFilm) => film.genre === genre);
   }
 }
 

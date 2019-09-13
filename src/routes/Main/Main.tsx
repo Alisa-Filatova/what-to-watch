@@ -2,14 +2,34 @@ import React from 'react';
 import { observer } from 'mobx-react';
 import stores from '../../stores';
 import FilmsList from '../../components/FilmsList/FilmsList';
+import GenresList from '../../components/GenresList/GenresList';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Loader from '../../components/Loader/Loader';
 import { IFilm } from '../../types';
 import stFetchStatus from '../../types/enums/stFetchStatus';
 
+interface State {
+  currentGenre: string;
+}
+
 @observer
-class Main extends React.PureComponent {
+class Main extends React.PureComponent<State> {
+
+  state: State = {
+    currentGenre: '',
+  };
+
+  componentDidMount(): void {
+    this.setState({ currentGenre: stores.filmsStore.currentGenre });
+  }
+
+  onGenreTabClick = (genre: string, films: IFilm[]) => {
+    this.setState( { currentGenre: genre } );
+    stores.filmsStore.changeCurrentGenre(genre);
+    stores.filmsStore.filterFilmsByGenre(films, genre);
+  };
+
   render() {
     const films: IFilm[] = Array.from(stores.filmsStore.films.values());
     const promoFilm = stores.filmsStore.promo;
@@ -83,17 +103,11 @@ class Main extends React.PureComponent {
         <div className="page-content">
           <section className="catalog">
             <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-            <ul className="catalog__genres-list">
-              {genres.map((genre) =>
-              <li
-                key={genre}
-                className="catalog__genres-item catalog__genres-item--active"
-              >
-                <a href="#" className="catalog__genres-link">{genre}</a>
-              </li>
-              )}
-            </ul>
+            <GenresList
+              currentGenre={this.state.currentGenre}
+              films={films}
+              onGenreClick={this.onGenreTabClick}
+            />
             {fetching === stFetchStatus.Fetching && <Loader />}
             {fetching === stFetchStatus.Done && <FilmsList films={films} />}
             {fetching === stFetchStatus.Error && <div>Oops! Something went wrong!</div>}

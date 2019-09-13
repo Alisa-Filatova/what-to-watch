@@ -45,5 +45,3 @@ export interface IUserResponse extends IUser {
 }
 
 export interface IRouteMatch {}
-
-

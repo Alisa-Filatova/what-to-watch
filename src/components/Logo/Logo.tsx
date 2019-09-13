@@ -23,5 +23,4 @@ Logo.defaultProps = {
   type: 'origin',
 };
 
-
 export default Logo;

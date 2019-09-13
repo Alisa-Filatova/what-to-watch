@@ -1,59 +1,58 @@
-import { observable, action, runInAction, onBecomeObserved, computed } from 'mobx';
+import { observable, action, runInAction, computed, onBecomeObserved } from 'mobx';
 import { IUserResponse, IUserRequest } from '../types';
 import { fetchUser, loginRequest } from '../services';
-import storage from '../storage';
-
-const COOKIE_KEY = 'authToken';
 
 class UserStore {
   @observable data: IUserResponse | null;
   @observable fetching: boolean;
   @observable isAuthenticated: boolean;
-  @observable cookie: any;
 
   constructor() {
     this.data = null;
     this.fetching = false;
-    this.isAuthenticated = this.getIsAuthenticated;
-    this.cookie = storage.get(COOKIE_KEY);
-    //
-    // onBecomeObserved(this, 'data', () => this.fetch());
+    this.isAuthenticated = this.checkAuthenticated;
+
+    onBecomeObserved(this, 'user', () => this.fetchUser());
   }
 
-  @computed get getIsAuthenticated(): boolean {
-    return this.cookie !== null;
+  @computed get user(): IUserResponse | null {
+    return this.data;
+  }
+
+  @computed get checkAuthenticated(): boolean {
+    return !!this.data;
   }
 
   @action async login(user: IUserRequest) {
     try {
+      this.fetching = true;
       await loginRequest(user);
-      this.fetch();
       runInAction(() => {
-        storage.set(COOKIE_KEY, 'asd123');
+        this.fetching = false;
       });
-    }
-    catch (error) {
+    } catch (error) {
       runInAction(() => {
-        this.isAuthenticated = false;
-        storage.remove(COOKIE_KEY);
-        this.cookie = null;
+        this.data = null;
+        this.fetching = false;
       });
     }
   }
 
-  @action async fetch(): Promise<IUserResponse | null> {
+  @action async fetchUser(): Promise<IUserResponse | null> {
     try {
       this.fetching = true;
       const userData = await fetchUser();
       runInAction(() => {
         this.data = userData;
         this.fetching = false;
+        this.isAuthenticated = true;
       });
       return Promise.resolve(userData);
     } catch (error) {
       runInAction(() => {
         this.data = null;
         this.fetching = false;
+        this.isAuthenticated = false;
       });
       return Promise.reject(error);
     }
