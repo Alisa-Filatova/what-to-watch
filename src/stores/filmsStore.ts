@@ -1,9 +1,9 @@
-import { observable, ObservableMap, action, runInAction, onBecomeObserved, computed } from 'mobx';
+import { observable, ObservableMap, action, runInAction, onBecomeObserved } from 'mobx';
 import { IFilm } from '../types';
 import stFetchStatus from '../types/enums/stFetchStatus';
 import { fetchFilms, fetchPromo, fetchFavorites } from '../services';
 import fetchFilm from '../actions/fetchFilm';
-import stores from '../stores';
+import Genres from '../types/enums/filmGenres';
 
 class FilmsStore {
   @observable films: ObservableMap<number, IFilm>;
@@ -13,10 +13,9 @@ class FilmsStore {
   @observable favoriteFilmsFetching: stFetchStatus;
 
   @observable promo: IFilm | null;
-  @observable currentGenre: string;
   @observable promoFetching: stFetchStatus;
 
-  @observable genres: any;
+  @observable currentGenre: Genres;
 
   constructor() {
     this.films = observable.map({});
@@ -26,52 +25,17 @@ class FilmsStore {
     this.favoriteFilmsFetching = stFetchStatus.None;
 
     this.promo = null;
-    this.currentGenre = 'All genres';
+    this.currentGenre = Genres.All;
     this.promoFetching = stFetchStatus.None;
-
-    this.genres = this.getUniqueGenresFromFilms;
 
     onBecomeObserved(this, 'films', () => this.fetchFilms());
     onBecomeObserved(this, 'favoriteFilms', () => this.fetchFavoriteFilms());
     onBecomeObserved(this, 'promo', () => this.fetchPromoFilm());
-    onBecomeObserved(this, 'genres', () => this.getUniqueGenresFromFilms);
   }
 
   byId(filmId: number): IFilm | undefined {
     return this.films.get(filmId);
   }
-
-  @computed get getUniqueGenresFromFilms(): IFilm[] {
-    if (this.films) {
-      const films =  Array.from(this.films.values());
-      const sortedFilms = films.map((film) => film).sort((filmA, filmB) => {
-        const nameA = filmA.genre.toLowerCase();
-        const nameB = filmB.genre.toLowerCase();
-
-        if (nameA < nameB) {
-          return -1;
-        } else if (nameA > nameB) {
-          return 1;
-        } else {
-          return 0;
-        }
-      });
-
-      const uniqueFilms = [];
-
-      sortedFilms.forEach((film, i, films) => {
-        if (i === 0 || film.genre !== films[i - 1].genre) {
-          uniqueFilms.push(film);
-        }
-      });
-
-      console.log(sortedFilms);
-
-      return uniqueFilms;
-    } else {
-      return [];
-    }
-  };
 
   @action setFilm(film: IFilm) {
     const current = this.byId(film.id);
@@ -136,11 +100,11 @@ class FilmsStore {
     }
   }
 
-  @action changeCurrentGenre (genre: string) {
+  @action changeCurrentGenre (genre: Genres) {
     this.currentGenre = genre;
   }
 
-  @action filterFilmsByGenre (films: IFilm[], genre: string) {
+  @action filterFilmsByGenre (films: IFilm[], genre: Genres) {
     films.filter((film: IFilm) => film.genre === genre);
   }
 }

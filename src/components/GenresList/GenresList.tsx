@@ -10,15 +10,15 @@ interface Props {
 
 const GENRES = [
   'All genres',
-  'Comedies',
+  'Comedy',
   'Crime',
   'Documentary',
-  'Dramas',
+  'Drama',
   'Horror',
   'Kids & Family',
   'Romance',
   'Sci-Fi',
-  'Thrillers',
+  'Thriller',
 ];
 
 const CitiesList: React.FunctionComponent<Props> = ({ onGenreClick, currentGenre, films }) => (

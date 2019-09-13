@@ -17,10 +17,10 @@ interface State {
   progressFilmInPercent: string;
 }
 
-class VideoPlayer extends React.PureComponent <Props, State> {
+class VideoPlayer extends React.PureComponent<Props, State> {
   private readonly _videoRef: React.RefObject<HTMLVideoElement>;
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this._videoRef = React.createRef();
@@ -63,7 +63,6 @@ class VideoPlayer extends React.PureComponent <Props, State> {
     return(
       <React.Fragment>
         <SvgSprite />
-
         <div className="player">
           <video
             ref={this._videoRef}
@@ -80,7 +79,6 @@ class VideoPlayer extends React.PureComponent <Props, State> {
             className="player__exit"
             onClick={(event) => {
               event.preventDefault();
-
               onCloseClick();
             }}
           >
@@ -137,15 +135,14 @@ class VideoPlayer extends React.PureComponent <Props, State> {
     );
   }
 
-  onPlayButtonClick(event) {
+  onPlayButtonClick(event: any) {
     event.preventDefault();
-
     this.setState((onwState) => ({
       isPlaying: !onwState.isPlaying,
-    }))
+    }));
   }
 
-  onTimeUpdate(event) {
+  onTimeUpdate(event: any) {
     const currentTime = Math.round(event.target.currentTime);
     const duration = Math.round(event.target.duration);
     const remainingDuration = VideoPlayer._getRemainingDuration(duration, currentTime);
@@ -158,19 +155,18 @@ class VideoPlayer extends React.PureComponent <Props, State> {
     });
   }
 
-  onCanPlayThrough(event) {
+  onCanPlayThrough(event: any) {
     const duration = Math.round(event.target.duration);
 
     this.setState({
       duration,
-    })
-  };
+    });
+  }
 
-  onFullScreenClick(event) {
+  onFullScreenClick(event: any) {
     event.preventDefault();
 
     const video = this._videoRef.current;
-
     video.requestFullscreen();
   }
 

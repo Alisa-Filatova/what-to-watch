@@ -117,13 +117,11 @@ class Film extends React.PureComponent<FilmProps> {
 
                 <div className="movie-card__text">
                   <p>{film.description}</p>
-
-                  <p
-                    className="movie-card__director"><strong>Director: {film.director}</strong>
+                  <p className="movie-card__director">
+                    <strong>Director: {film.director}</strong>
                   </p>
-
-                  <p
-                    className="movie-card__starring"><strong>Starring: {film.starring.join(', ')} and other</strong>
+                  <p className="movie-card__starring">
+                    <strong>Starring: {film.starring.join(', ')} and other</strong>
                   </p>
                 </div>
               </div>
@@ -139,39 +137,73 @@ class Film extends React.PureComponent<FilmProps> {
               <article className="small-movie-card catalog__movies-card">
                 <button className="small-movie-card__play-btn" type="button">Play</button>
                 <div className="small-movie-card__image">
-                  <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
-                       alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175"/>
+                  <img
+                    src="./img/fantastic-beasts-the-crimes-of-grindelwald.jpg"
+                    alt="Fantastic Beasts: The Crimes of Grindelwald"
+                    width="280"
+                    height="175"
+                  />
                 </div>
                 <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of
-                    Grindelwald</a>
+                  <a
+                    className="small-movie-card__link"
+                    href=""
+                  >
+                    Fantastic Beasts: The Crimes of
+                    Grindelwald
+                  </a>
                 </h3>
               </article>
 
               <article className="small-movie-card catalog__movies-card">
                 <button className="small-movie-card__play-btn" type="button">Play</button>
                 <div className="small-movie-card__image">
-                  <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175"/>
+                  <img
+                    src="img/bohemian-rhapsody.jpg"
+                    alt="Bohemian Rhapsody"
+                    width="280"
+                    height="175"
+                  />
                 </div>
                 <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
+                  <a
+                    className="small-movie-card__link"
+                    href="movie-page.html"
+                  >
+                    Bohemian Rhapsody
+                  </a>
                 </h3>
               </article>
 
               <article className="small-movie-card catalog__movies-card">
                 <button className="small-movie-card__play-btn" type="button">Play</button>
                 <div className="small-movie-card__image">
-                  <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175"/>
+                  <img
+                    src="img/macbeth.jpg"
+                    alt="Macbeth"
+                    width="280"
+                    height="175"
+                  />
                 </div>
                 <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
+                  <a
+                    className="small-movie-card__link"
+                    href="movie-page.html"
+                  >
+                    Macbeth
+                  </a>
                 </h3>
               </article>
 
               <article className="small-movie-card catalog__movies-card">
                 <button className="small-movie-card__play-btn" type="button">Play</button>
                 <div className="small-movie-card__image">
-                  <img src="img/aviator.jpg" alt="Aviator" width="280" height="175"/>
+                  <img
+                    src="img/aviator.jpg"
+                    alt="Aviator"
+                    width="280"
+                    height="175"
+                  />
                 </div>
                 <h3 className="small-movie-card__title">
                   <a className="small-movie-card__link" href="movie-page.html">Aviator</a>

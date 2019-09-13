@@ -40,7 +40,7 @@ class Login extends React.PureComponent<Props> {
       const password = this.passwordInput.current.value;
 
       if (email && password && EMAIL_REGEXP.test(email)) {
-
+        // TODO
       }
     }
   };

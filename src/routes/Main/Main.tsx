@@ -11,6 +11,7 @@ import stFetchStatus from '../../types/enums/stFetchStatus';
 
 interface State {
   currentGenre: string;
+  films: IFilm[];
 }
 
 @observer
@@ -18,6 +19,7 @@ class Main extends React.PureComponent<State> {
 
   state: State = {
     currentGenre: '',
+    films: Array.from(stores.filmsStore.films.values()),
   };
 
   componentDidMount(): void {
@@ -25,16 +27,15 @@ class Main extends React.PureComponent<State> {
   }
 
   onGenreTabClick = (genre: string, films: IFilm[]) => {
-    this.setState( { currentGenre: genre } );
+    this.setState( { currentGenre: genre, films: films } );
     stores.filmsStore.changeCurrentGenre(genre);
-    stores.filmsStore.filterFilmsByGenre(films, genre);
   };
 
   render() {
     const films: IFilm[] = Array.from(stores.filmsStore.films.values());
+    const filteredFilms = films.filter((film) => film.genre === this.state.currentGenre);
     const promoFilm = stores.filmsStore.promo;
     const fetching = stores.filmsStore.filmsFetching;
-    const genres = stores.filmsStore.genres;
 
     return (
       <>
@@ -63,7 +64,12 @@ class Main extends React.PureComponent<State> {
                   <div className="movie-card__info">
                     <div
                       className="movie-card__poster"
-                      style={{backgroundColor: promoFilm.background_color}}>
+                      style={
+                        {
+                          backgroundColor: promoFilm.background_color,
+                        }
+                      }
+                    >
                       <img
                         src={promoFilm.poster_image}
                         alt={promoFilm.name}
@@ -109,7 +115,7 @@ class Main extends React.PureComponent<State> {
               onGenreClick={this.onGenreTabClick}
             />
             {fetching === stFetchStatus.Fetching && <Loader />}
-            {fetching === stFetchStatus.Done && <FilmsList films={films} />}
+            {fetching === stFetchStatus.Done && <FilmsList films={filteredFilms} />}
             {fetching === stFetchStatus.Error && <div>Oops! Something went wrong!</div>}
             <div className="catalog__more">
               <button className="catalog__button" type="button">Show more</button>

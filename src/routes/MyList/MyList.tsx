@@ -18,7 +18,11 @@ class MyList extends React.Component<Props> {
 
     return (
       <div className="user-page">
-        <Header user={stores.userStore.data} pageTitle="My List" prefix="user-page" />
+        <Header
+          user={stores.userStore.data}
+          pageTitle="My List"
+          prefix="user-page"
+        />
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <FilmsList films={films} />

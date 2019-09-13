@@ -19,10 +19,9 @@ const onFail = (error: any) => {
     } else if (error.response.status >= ResponseStatus.INTERNAL_SERVER_ERROR
       && error.response.status <= ResponseStatus.NETWORK_CONNECT_TIMEOUT
     ) {
-
+      // TODO
     }
   }
 };
 
 api.interceptors.response.use(onSuccess, onFail);
-
